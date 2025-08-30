@@ -16,14 +16,23 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = window.scrollY / scrollHeight;
-      setScrollProgress(Math.min(progress, 1));
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      const progress = Math.min(currentScroll / totalHeight, 1);
+      setScrollProgress(progress);
 
       // Determine active section based on scroll position
-      const sections = ['home', 'about', 'farmer', 'marketplace', 'rewards', 'impact', 'contact'];
-      const currentSection = Math.floor(progress * sections.length);
-      setActiveSection(sections[Math.min(currentSection, sections.length - 1)]);
+      const sections = document.querySelectorAll('section[id]');
+      let currentActiveSection = 'home';
+      
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          currentActiveSection = section.id;
+        }
+      });
+      
+      setActiveSection(currentActiveSection);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -36,6 +45,9 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
     
+    // Initial call to set correct values
+    handleScroll();
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -44,7 +56,7 @@ function App() {
 
   return (
     <Router>
-      <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-emerald-50 overflow-x-hidden">
+      <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-emerald-50 to-amber-50 overflow-x-hidden">
         <BackgroundTree mousePosition={mousePosition} scrollProgress={scrollProgress} />
         <Header activeSection={activeSection} />
         <FloatingTree progress={scrollProgress} />
