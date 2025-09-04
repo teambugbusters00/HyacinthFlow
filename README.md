@@ -1,6 +1,6 @@
 # 🌱 Hyacinth Flow – From Weed to Wealth  
 
-Transforming the invasive water hyacinth into **livelihood, clean energy, and eco-products** through an interactive digital platform.  
+Transforming the invasive **water hyacinth** into **livelihood, clean energy, and eco-products** through an interactive AI-powered platform.  
 
 🚀 Live Demo → [![Visit Site](https://img.shields.io/badge/Live-Site-brightgreen?style=for-the-badge&logo=vercel)](https://hyacinth-flow.vercel.app/#)  
 
@@ -22,18 +22,19 @@ The platform is **community-first**, eco-conscious, and designed for **circular 
 
 ## 🖼️ Features  
 
-✅ **Floating Fact Bubbles** → Live floating values that change continuously to show real-time project impact.  
+✅ **Floating Fact Bubbles** → Real-time impact values (updated continuously).  
 ✅ **Farmer Rewards System** → Trade batches & unlock farming tools or clean-energy incentives.  
 ✅ **Circular Economy Model** → From weed → fiber → eco-products → clean energy.  
 ✅ **Marketplace** → Eco-products listed & sold directly.  
-✅ **Interactive Design** → A floating tree that grows as users scroll through the site.  
+✅ **AI Insights** → Plain-language recommendations for farmers & NGOs.  
+✅ **Interactive Design** → A floating tree that grows as users scroll.  
 
 ---
 
 ## 📊 Revenue Model  
 
-- **Product Sales Commission** → 10–20% platform commission on eco-products.  
-- **Biogas Energy Sharing** → 20–30% revenue from biogas generation.  
+- **Product Sales Commission** → 10–20% platform fee.  
+- **Biogas Energy Sharing** → 20–30% revenue from biogas units.  
 - **CSR & Partnerships** → With NGOs, government, and eco-brands.  
 
 💡 Example: If ₹75,000 worth of products are sold, the platform earns ~₹11,000 commission while farmers & artisans keep the majority share.  
@@ -42,40 +43,64 @@ The platform is **community-first**, eco-conscious, and designed for **circular 
 
 ## 🌍 Impact  
 
-- 👩‍🌾 **Farmers Empowered** – Additional income + farming tools as rewards.  
-- 🏞️ **Waterways Restored** – Cleaner lakes and rivers, improved biodiversity.  
-- ♻️ **Eco-Products Created** – Sustainable mats, textiles, handicrafts.  
+- 👩‍🌾 **Farmers Empowered** – Additional income + rewards.  
+- 🏞️ **Waterways Restored** – Cleaner lakes, improved biodiversity.  
+- ♻️ **Eco-Products Created** – Mats, textiles, handicrafts.  
 - ⚡ **Clean Energy** – Biogas units for households and communities.  
 
 ---
 
-## 🛠️ Tech Stack  
+## 🛠️ Technology Stack  
 
-- **Frontend:** React + Next.js + Tailwind CSS  
-- **Deployment:** Vercel  
-- **Animations:** CSS + React hooks (floating values, scroll tree)  
+### 🎨 Frontend  
+- React 18 + Vite + Tailwind CSS + Framer Motion  
+- Deployment → Vercel  
+- Real-time UI with Supabase  
+
+### ⚙️ Backend  
+- FastAPI + SQLAlchemy + Pydantic + Uvicorn  
+- REST APIs + Supabase integration  
+
+### 📚 Database  
+- Supabase PostgreSQL  
+- Real-time subscriptions  
+- Row-Level Security (RLS) enabled  
+
+### 🧠 AI/ML/LLM  
+
+#### 🔹 Machine Learning  
+- **SVM Classifier** → Weed infestation risk (Accuracy: 80%)  
+- **XGBoost Regressor** → Biomass growth forecasting (R² = 0.89)  
+- **Random Forest** → Backup classification  
+- **Neural Network** → Complex pattern fallback  
+
+#### 🔹 Large Language Model (LLM)  
+- **Model:** OpenAI GPT-3.5  
+- **Uses:**  
+  - Converts ML outputs into farmer-friendly advice  
+  - Provides risk explanations (e.g., “Harvest in 10 days to avoid oxygen loss”)  
+  - Generates awareness messages (SMS/WhatsApp style)  
+  - Suggests market linkages for products (biogas, compost, handicrafts)  
 
 ---
 
-## 📌 Live Links  
+## 🗄️ Database Schema (Supabase PostgreSQL)  
 
-- 🌐 **Main App** → [Hyacinth Flow](https://hyacinth-flow.vercel.app/#)  
-- 🖼️ **Pitch Deck (Coming Soon)**  
-- 📖 **Docs (Coming Soon)**  
-
----
-
-## 🚀 Getting Started  
-
-```bash
-# Clone the repo
-git clone https://github.com/your-username/hyacinth-flow.git
-
-# Go to project folder
-cd hyacinth-flow
-
-# Install dependencies
-npm install
-
-# Run locally
-npm run dev
+```sql
+CREATE TABLE predictions (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ DEFAULT NOW(),
+    latitude FLOAT NOT NULL,
+    longitude FLOAT NOT NULL,
+    water_temperature FLOAT NOT NULL,
+    water_ph FLOAT NOT NULL,
+    nutrient_level FLOAT NOT NULL,
+    sunlight_exposure FLOAT NOT NULL,
+    water_flow_rate FLOAT NOT NULL,
+    current_biomass_density FLOAT NOT NULL,
+    water_body_type VARCHAR(50) NOT NULL,
+    season VARCHAR(20) NOT NULL,
+    infestation_risk VARCHAR(20),
+    biomass_growth FLOAT,
+    insights TEXT
+);
